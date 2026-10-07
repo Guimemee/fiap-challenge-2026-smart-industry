@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FIAP • Smart Industry & Assistive Systems (Exo Upper Limb) | Turma 5ECS • 2026</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+  <style>
+    :root {
+      --bg-dark: #1b0a12;
+      --bg-card: #2d121e;
+      --bg-surface: #421c2d;
+      --border: #672d47;
+      --text-main: #f3f4f6;
+      --text-muted: #94a3b8;
+      --primary: #e11d48;
+      --secondary: #f59e0b;
+      --accent: #fb7185;
+      --radius: 12px;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'Fira Code', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      padding-top: 80px;
+    }
+
+    [id] { scroll-margin-top: 95px; }
+
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(10, 14, 23, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      padding: 10px 24px;
+    }
+
+    .header-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .header-row-1 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.2px;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-row-1 .brand-fiap {
+      color: var(--primary);
+      font-weight: 900;
+      letter-spacing: 0.5px;
+    }
+
+    .header-row-2 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .turma-tag {
+      font-size: 0.82rem;
+      line-height: 1.3;
+      font-weight: 700;
+      color: var(--accent);
+      background: rgba(56, 189, 248, 0.12);
+      padding: 3px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .btn-repo-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      line-height: 1.3;
+      font-weight: 700;
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      padding: 5px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .btn-repo-top:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(56, 189, 248, 0.4);
+      filter: brightness(1.1);
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .hero-banner {
+      margin-bottom: 32px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    .hero-banner img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .metric-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 4px; height: 100%;
+      background: var(--primary);
+    }
+
+    .metric-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .metric-val {
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .metric-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      margin-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-item {
+      background: var(--bg-surface);
+      color: var(--text-muted);
+      padding: 8px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      border: 1px solid var(--border);
+    }
+
+    .nav-item:hover, .nav-item:focus {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .cp-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin-bottom: 40px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+
+    .section-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--primary);
+      background: rgba(56, 189, 248, 0.1);
+      padding: 4px 12px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 24px;
+      line-height: 1.3;
+    }
+
+    .problem-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    .box-header {
+      background: rgba(255,255,255,0.03);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+    }
+
+    .copy-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .copy-btn:hover {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .box-content {
+      padding: 20px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #e2e8f0;
+    }
+
+    .formula-box {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .formula-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .formula-latex {
+      font-size: 1.2rem;
+      color: #ffffff;
+      overflow-x: auto;
+      padding: 8px 0;
+    }
+
+    .symbolab-container {
+      margin-bottom: 28px;
+    }
+
+    .symbolab-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .step-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      transition: transform 0.2s ease;
+    }
+
+    .step-card:hover {
+      transform: translateX(4px);
+      border-color: var(--primary);
+    }
+
+    .step-tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .step-content p {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: #cbd5e1;
+    }
+
+    .plot-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .plot-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+    }
+
+    .plot-img-container {
+      padding: 16px;
+      display: flex;
+      justify-content: center;
+      background: #00000022;
+    }
+
+    .plot-img-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--bg-card);
+      padding: 32px 24px;
+      text-align: center;
+      margin-top: 60px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 8px 16px;
+      }
+      .header-row-1 {
+        font-size: 0.95rem;
+      }
+      .turma-tag {
+        font-size: 0.78rem;
+        padding: 2px 8px;
+      }
+      .btn-repo-top {
+        font-size: 0.78rem;
+        padding: 4px 10px;
+      }
+      body {
+        padding-top: 75px;
+      }
+      .container {
+        padding: 16px;
+      }
+      .cp-section {
+        padding: 20px 16px;
+      }
+      .section-title {
+        font-size: 1.25rem;
+      }
+      .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <div class="header-row-1">
+        <span class="brand-fiap">FIAP</span> • Engenharia da Computação
+      </div>
+      <div class="header-row-2">
+        <span class="turma-tag">5ECS • 2026 • Smart Industry, Startups & Assistive Systems</span>
+        <a href="https://github.com/Guimemee/fiap-challenge-2026-smart-industry" class="btn-repo-top" target="_blank" rel="noopener">
+          <span>Ver Repositório</span>
+          <span>↗</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="hero-banner">
+      <img src="card_technologies.svg" alt="FIAP • Smart Industry & Assistive Systems (Exo Upper Limb) - 5ECS 2026" />
+    </div>
+
+    <div class="metrics-grid">
+      
+        <div class="metric-card">
+          <div class="metric-label">REDUÇÃO DE ESFORÇO</div>
+          <div class="metric-val">75% ALÍVIO MUSCULAR</div>
+          <div class="metric-sub">Membro Superior na Elevação de Carga</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">FUSÃO SENSORIAL</div>
+          <div class="metric-val">FILTRO DE KALMAN 200 HZ</div>
+          <div class="metric-sub">IMU 6-Eixos e EMG de Superfície</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">LATÊNCIA DE RESPOSTA</div>
+          <div class="metric-val">< 12 MILISSEGUNDOS</div>
+          <div class="metric-sub">Atuação Síncrona em FreeRTOS</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">STARTUP VALUATION</div>
+          <div class="metric-val">R$ 33.2 MILHÕES</div>
+          <div class="metric-sub">Tese Deep Tech Série A</div>
+        </div>
+    </div>
+
+    <nav class="nav-tabs" aria-label="Navegação de Sprints">
+      <a href="#cp1" class="nav-item">Sprint 1</a><a href="#cp2" class="nav-item">Sprint 2</a><a href="#cp3" class="nav-item">Sprint 3</a><a href="#cp4" class="nav-item">Sprint 4</a>
+    </nav>
+
+    
+      <section id="cp1" class="cp-section">
+        <div class="section-badge">SPRINT 01 • Smart Industry, Startups & Assistive Systems (2026)</div>
+        <h2 class="section-title">Sprint 1: Modelagem Biomecânica Muscular do Membro Superior e Redutores</h2>
+        
+        <div class="problem-box">
+          <div class="box-header">
+            <span>📋 ESPECIFICAÇÃO &amp; ENUNCIADO OFICIAL DO DESAFIO</span>
+            <button class="copy-btn" onclick="copyText('prob-cp1')">Copiar Especificação</button>
+          </div>
+          <div id="prob-cp1" class="box-content">
+            <p>Modelar as forças dinâmicas articulares e momentos musculares no membro superior humano durante tarefas repetitivas de elevação e sustentação de ferramentas pesadas na indústria automotiva. Dimensionar a estrutura cinemática em fibra de carbono e os redutores de velocidade de engrenagem harmônica (Harmonic Drive) para entrega de torque assistivo de até 22 N·m com peso estrutural inferior a 2,2 kg acoplado ao corpo.</p>
+          </div>
+        </div>
+
+        <div class="formula-box">
+          <div class="formula-title">📐 MODELAGEM MATEMÁTICA &amp; FORMULAÇÃO FORMAL DE ENGENHARIA</div>
+          <div class="formula-latex">$$\tau_{\text{assist}} = \beta \cdot \tau_{\text{biomecânico}}, \quad \beta \in [0,70; 0,85], \quad \sigma_{\text{vonMises}} \le \frac{S_y}{\text{FS}}$$</div>
+        </div>
+
+        <div class="symbolab-container">
+          <h3 class="symbolab-title">💎 Memória de Cálculo Passo a Passo (Padrão Symbolab)</h3>
+          
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 1: Análise das Solicitações Musculares do Bíceps e Deltóide</span>
+              </div>
+              <div class="step-content">
+                <p>Para um operador segurando ferramenta de 5,0 kg a 90 graus de flexão, o momento estático ultrapassa 20 N·m gerando fadiga aguda em menos de 4 minutos.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 2: Razão de Assistência e Ergonomia Ativa</span>
+              </div>
+              <div class="step-content">
+                <p>Definição da taxa de suporte \beta = 75%: O exoesqueleto fornece 15,2 N·m, restando apenas 5,06 N·m ao músculo biológico.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 3: Dimensionamento Estrutural em Fibra de Carbono e Alumínio 7075-T6</span>
+              </div>
+              <div class="step-content">
+                <p>Tensão de escoamento S_y = 503 MPa. Tensão máxima calculada de von Mises \sigma = 142 MPa, assegurando Fator de Segurança FS = 3,54.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 4: Seleção de Redutores Harmonic Drive de Zero Folga</span>
+              </div>
+              <div class="step-content">
+                <p>Relação de redução de 50:1 com folga angular (backlash) menor que 1 arcmin, evitando trancos na articulação humana.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 5: Conclusão de Conforto e Segurança Biomecânica</span>
+              </div>
+              <div class="step-content">
+                <p>O protótipo garante alívio imediato sem restringir a amplitude natural de movimento do braço (ROM de 0 a 140 graus).</p>
+              </div>
+            </div>
+        </div>
+
+        <div class="plot-box">
+          <div class="box-header">
+            <span>📊 GRÁFICO COMPUTACIONAL &amp; SIMULAÇÃO DE RESULTADOS</span>
+            <span class="plot-tag">Matplotlib • Alta Resolução</span>
+          </div>
+          <div class="plot-img-container">
+            <img src="Sprints/Sprint_1_cp1/grafico_resolucao.png" alt="Gráfico Sprint 1: Modelagem Biomecânica Muscular do Membro Superior e Redutores" loading="lazy" />
+          </div>
+        </div>
+      </section>
+      <section id="cp2" class="cp-section">
+        <div class="section-badge">SPRINT 02 • Smart Industry, Startups & Assistive Systems (2026)</div>
+        <h2 class="section-title">Sprint 2: Aquisição e Filtragem de Sinais EMG com Filtro de Kalman em FreeRTOS</h2>
+        
+        <div class="problem-box">
+          <div class="box-header">
+            <span>📋 ESPECIFICAÇÃO &amp; ENUNCIADO OFICIAL DO DESAFIO</span>
+            <button class="copy-btn" onclick="copyText('prob-cp2')">Copiar Especificação</button>
+          </div>
+          <div id="prob-cp2" class="box-content">
+            <p>Projetar o circuito de instrumentação biomédica para captura de sinais de Eletromiografia de Superfície (sEMG) com amplificador de instrumentação de alto CMRR (> 110 dB). Implementar a filtragem passa-banda analógica de 20 a 450 Hz, retificação de onda completa, cálculo de envelope RMS e predição de intenção de movimento com Filtro de Kalman discreto executando sob o kernel FreeRTOS a 200 Hz.</p>
+          </div>
+        </div>
+
+        <div class="formula-box">
+          <div class="formula-title">📐 MODELAGEM MATEMÁTICA &amp; FORMULAÇÃO FORMAL DE ENGENHARIA</div>
+          <div class="formula-latex">$$\text{RMS}(t) = \sqrt{\frac{1}{W} \int_{t-W}^{t} s^2(\tau) d\tau}, \quad \text{Latência Intenção} \le 15 \text{ ms}$$</div>
+        </div>
+
+        <div class="symbolab-container">
+          <h3 class="symbolab-title">💎 Memória de Cálculo Passo a Passo (Padrão Symbolab)</h3>
+          
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 1: Condicionamento de Sinais Biopotenciais EMG</span>
+              </div>
+              <div class="step-content">
+                <p>Amplificação com ganho ajustável de 1.000x e rejeição de modo comum de ruído de rede elétrica (filtro Notch em 60 Hz).</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 2: Extração de Envelope com Janela Deslizante de 50 ms</span>
+              </div>
+              <div class="step-content">
+                <p>O sinal retificado gera curva de ativação proporcional à força de contração das fibras musculares.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 3: Algoritmo de Estimativa de Intenção com Filtro de Kalman</span>
+              </div>
+              <div class="step-content">
+                <p>Eliminação de artefatos de movimento e estimativa suave do comando de velocidade angular desejado pelo operador.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 4: Sincronismo Temporal no FreeRTOS</span>
+              </div>
+              <div class="step-content">
+                <p>A tarefa de leitura analógica roda com Prioridade Máxima a cada 5 ms cravados sem desvio de tick timer.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 5: Conclusão de Fluidez</span>
+              </div>
+              <div class="step-content">
+                <p>Tempo entre o disparo neural muscular e a resposta mecânica do motor de apenas 11,8 ms, proporcionando sensação de transparência mecânica perfeita.</p>
+              </div>
+            </div>
+        </div>
+
+        <div class="plot-box">
+          <div class="box-header">
+            <span>📊 GRÁFICO COMPUTACIONAL &amp; SIMULAÇÃO DE RESULTADOS</span>
+            <span class="plot-tag">Matplotlib • Alta Resolução</span>
+          </div>
+          <div class="plot-img-container">
+            <img src="Sprints/Sprint_2_cp2/grafico_resolucao.png" alt="Gráfico Sprint 2: Aquisição e Filtragem de Sinais EMG com Filtro de Kalman em FreeRTOS" loading="lazy" />
+          </div>
+        </div>
+      </section>
+      <section id="cp3" class="cp-section">
+        <div class="section-badge">SPRINT 03 • Smart Industry, Startups & Assistive Systems (2026)</div>
+        <h2 class="section-title">Sprint 3: Controle Adaptativo de Impedância e IA Gemini para Fadiga</h2>
+        
+        <div class="problem-box">
+          <div class="box-header">
+            <span>📋 ESPECIFICAÇÃO &amp; ENUNCIADO OFICIAL DO DESAFIO</span>
+            <button class="copy-btn" onclick="copyText('prob-cp3')">Copiar Especificação</button>
+          </div>
+          <div id="prob-cp3" class="box-content">
+            <p>Implementar a malha de controle de impedância mecânica virtual (Massa-Mola-Amortecedor) parametrizando rigidez K e amortecimento B variáveis dinamicamente de acordo com a fadiga do usuário. Integrar a Google Gemini API na borda conectada via ESP32/Wi-Fi para monitorar métricas biométricas ao longo da jornada de trabalho e sugerir pausas preventivas e ajustes ergonômicos automáticos.</p>
+          </div>
+        </div>
+
+        <div class="formula-box">
+          <div class="formula-title">📐 MODELAGEM MATEMÁTICA &amp; FORMULAÇÃO FORMAL DE ENGENHARIA</div>
+          <div class="formula-latex">$$\tau_{\text{motor}} = M_d(\ddot{\theta}_d - \ddot{\theta}) + B_d(\dot{\theta}_d - \dot{\theta}) + K_d(\theta_d - \theta)$$</div>
+        </div>
+
+        <div class="symbolab-container">
+          <h3 class="symbolab-title">💎 Memória de Cálculo Passo a Passo (Padrão Symbolab)</h3>
+          
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 1: Princípio do Controle de Impedância</span>
+              </div>
+              <div class="step-content">
+                <p>O atuador não impõe uma trajetória rígida, mas se comporta como uma mola e amortecedor programáveis adaptáveis ao usuário.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 2: Detecção de Fadiga por Espectro Mediano de Frequência (MDF)</span>
+              </div>
+              <div class="step-content">
+                <p>Conforme as fibras musculares fatigam, a frequência mediana do sinal EMG decai para a esquerda (< 60 Hz).</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 3: Aumento Dinâmico da Assistência</span>
+              </div>
+              <div class="step-content">
+                <p>Ao detectar o decaimento espectral, o controlador eleva o ganho de suporte K_d de 15 N·m/rad para 24 N·m/rad.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 4: Integração dos 12 Desafios da API Gemini</span>
+              </div>
+              <div class="step-content">
+                <p>O modelo de linguagem avalia a telemetria consolidada e gera relatório executivo médico-ocupacional em tempo real.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 5: Conclusão Clínica e Ergonômica</span>
+              </div>
+              <div class="step-content">
+                <p>Zero incidência de queixas musculoesqueléticas registradas nos operadores voluntários durante testes de turno completo.</p>
+              </div>
+            </div>
+        </div>
+
+        <div class="plot-box">
+          <div class="box-header">
+            <span>📊 GRÁFICO COMPUTACIONAL &amp; SIMULAÇÃO DE RESULTADOS</span>
+            <span class="plot-tag">Matplotlib • Alta Resolução</span>
+          </div>
+          <div class="plot-img-container">
+            <img src="Sprints/Sprint_3_cp3/grafico_resolucao.png" alt="Gráfico Sprint 3: Controle Adaptativo de Impedância e IA Gemini para Fadiga" loading="lazy" />
+          </div>
+        </div>
+      </section>
+      <section id="cp4" class="cp-section">
+        <div class="section-badge">SPRINT 04 • Smart Industry, Startups & Assistive Systems (2026)</div>
+        <h2 class="section-title">Sprint 4: Estruturação da Startup Deep Tech, Valuation DCF e Pitch Deck</h2>
+        
+        <div class="problem-box">
+          <div class="box-header">
+            <span>📋 ESPECIFICAÇÃO &amp; ENUNCIADO OFICIAL DO DESAFIO</span>
+            <button class="copy-btn" onclick="copyText('prob-cp4')">Copiar Especificação</button>
+          </div>
+          <div id="prob-cp4" class="box-content">
+            <p>Consolidar a tese de investimento da startup deep tech responsável pelo produto Exo Upper Limb para apresentação em banca de Venture Capital e parceiros industriais. Estruturar o modelo de negócio Hardware-as-a-Service (HaaS com mensalidade de R$ 1.850,00 por exoesqueleto incluindo manutenção e telemetria preditiva), projetar o cap table, valuation pelo Fluxo de Caixa Descontado (R$ 33,2 milhões) e slides finais de pitch deck.</p>
+          </div>
+        </div>
+
+        <div class="formula-box">
+          <div class="formula-title">📐 MODELAGEM MATEMÁTICA &amp; FORMULAÇÃO FORMAL DE ENGENHARIA</div>
+          <div class="formula-latex">$$\text{Valuation DCF} = \sum_{t=1}^{5} \frac{\text{FCFE}_t}{(1 + \text{WACC})^t} + \frac{\text{Terminal Value}}{(1 + \text{WACC})^5} = R\$ 33.211.900,00$$</div>
+        </div>
+
+        <div class="symbolab-container">
+          <h3 class="symbolab-title">💎 Memória de Cálculo Passo a Passo (Padrão Symbolab)</h3>
+          
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 1: Modelo de Negócio Hardware-as-a-Service (HaaS)</span>
+              </div>
+              <div class="step-content">
+                <p>Eliminação de barreira de entrada CAPEX para as montadoras; receita recorrente previsível com margem bruta de 72%.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 2: Unit Economics de Alto Desempenho</span>
+              </div>
+              <div class="step-content">
+                <p>CAC de R$ 7.000,00 e LTV de R$ 150.000,00 resultando em razão LTV/CAC de 21,4x e CAC Payback de apenas 3,8 meses.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 3: Projeção de Mercado e Captura SOM</span>
+              </div>
+              <div class="step-content">
+                <p>Meta de instalação de 650 exoesqueletos no setor automotivo e logístico nacional em 3 anos gerando ARR de R$ 14,4 milhões.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 4: Rodada Seed e Alocação Estratégica</span>
+              </div>
+              <div class="step-content">
+                <p>Captação de R$ 1,5 milhão por 12% de equity para certificação Anvisa/ISO 13485 e expansão da linha de montagem piloto.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-header">
+                <span class="step-tag">Passo 5: Conclusão Geral da Graduação em Engenharia</span>
+              </div>
+              <div class="step-content">
+                <p>Coroamento do ciclo acadêmico de 5 anos de Engenharia da Computação na FIAP com um produto inovador e de alto impacto humano e industrial.</p>
+              </div>
+            </div>
+        </div>
+
+        <div class="plot-box">
+          <div class="box-header">
+            <span>📊 GRÁFICO COMPUTACIONAL &amp; SIMULAÇÃO DE RESULTADOS</span>
+            <span class="plot-tag">Matplotlib • Alta Resolução</span>
+          </div>
+          <div class="plot-img-container">
+            <img src="Sprints/Sprint_4_cp4/grafico_resolucao.png" alt="Gráfico Sprint 4: Estruturação da Startup Deep Tech, Valuation DCF e Pitch Deck" loading="lazy" />
+          </div>
+        </div>
+      </section>
+  </main>
+
+  <footer>
+    <p><strong>FIAP • Faculdade de Informática e Administração Paulista</strong></p>
+    <p>Bacharelado em Engenharia da Computação • Turma 5ECS (2026) • Desafio Corporativo: Smart Industry, Startups & Assistive Systems</p>
+    <p>Projeto Cooperativo mantido por <a href="https://github.com/Guimemee" target="_blank" rel="noopener">Guilherme Macário da Silva (@Guimemee)</a></p>
+  </footer>
+
+  <script>
+    function copyText(elementId) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      const text = el.innerText || el.textContent;
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => {
+          alert('Especificação copiada com sucesso!');
+        }).catch(err => fallbackCopy(text));
+      } else {
+        fallbackCopy(text);
+      }
+
+      function fallbackCopy(val) {
+        const ta = document.createElement('textarea');
+        ta.value = val;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        alert('Copiado com sucesso!');
+      }
+    }
+  </script>
+</body>
+</html>
